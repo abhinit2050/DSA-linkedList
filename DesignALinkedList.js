@@ -54,8 +54,35 @@ MyLinkedList.prototype.addAtIndex = function(index, val) {
     this.size++;
 };
 
+MyLinkedList.prototype.get = function(index) {
+    let current = this.head;
+
+    if(index<0 || index >= this.size) return -1;
+
+    for(let i=0; i<index;i++){
+        current = current.next
+    }
+
+    return current.val;
+};
+
+MyLinkedList.prototype.deleteAtIndex = function(index) {
+    let current = this.head;
+    
+    if(index<0 || index>=this.size) return;
+
+    if(index == 0) this.head = this.head.next;
+    
+    for(let i=0;i<index-1;i++){
+        current = current.next
+    }
+    current.next = current.next.next;
+    this.size--;
+};
+
 let mylinkedList = new MyLinkedList();
 mylinkedList.addAtHead(1);
 mylinkedList.addAtTail(3);
 mylinkedList.addAtIndex(1, 2); 
-console.log(mylinkedList); // Should show the linked list with 1 -> 2 -> 3
+mylinkedList.deleteAtIndex(1); 
+console.log(mylinkedList);
